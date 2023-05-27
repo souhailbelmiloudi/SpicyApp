@@ -41,7 +41,7 @@ public class jugar_tus_preguntas extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 736, 503);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 0));
+		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		JLabel boton_siguiente = new JLabel("Siguiente");
 		boton_siguiente.setVisible(false);

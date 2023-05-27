@@ -18,7 +18,7 @@ public class menu_tus_preguntas extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 20, 147));
-		panel.setBounds(0, 0, 748, 489);
+		panel.setBounds(0, 0, 781, 528);
 		add(panel);
 		panel.setLayout(null);
 		

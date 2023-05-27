@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TUS_PREGUNTAS extends JPanel {
 	
@@ -21,7 +23,7 @@ public class TUS_PREGUNTAS extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 140, 0));
-		panel.setBounds(0, 0, 744, 510);
+		panel.setBounds(0, 0, 755, 515);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -76,6 +78,13 @@ public class TUS_PREGUNTAS extends JPanel {
 		panel.add(busca_Field);
 		
 		JLabel buscar_pre = new JLabel("¿?");
+		buscar_pre.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String consulta = "Select id from ";
+				
+			}
+		});
 		buscar_pre.setHorizontalAlignment(SwingConstants.CENTER);
 		buscar_pre.setForeground(Color.BLACK);
 		buscar_pre.setFont(new Font("Lucida Fax", Font.BOLD, 25));
