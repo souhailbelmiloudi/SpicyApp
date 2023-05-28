@@ -10,7 +10,6 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import tusPreguntas.BuscarPregunta;
 import tusPreguntas.Mis_preguntas;
-import tusPreguntas.Tus_preguntas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
