@@ -23,6 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+
 public class BuscarPregunta extends JFrame {
 
 	/**
@@ -97,35 +98,35 @@ public class BuscarPregunta extends JFrame {
 		lblCerrar.setFont(new Font("Verdana", Font.PLAIN, 19));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(305, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
+					.addGap(290))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(306, Short.MAX_VALUE)
+					.addComponent(lblCerrar, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
+					.addGap(289))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addGap(26)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 741, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(32, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(292)
-					.addComponent(lblCerrar, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(303, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(309, Short.MAX_VALUE)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-					.addGap(286))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(37, Short.MAX_VALUE)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(24)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblCerrar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		JTable table = new JTable(modelo);
-		table.setBackground(new Color(230, 230, 250));
+		table.setBackground(new Color(250, 240, 230));
 		table.setFont(new Font("Verdana", Font.BOLD, 12));
 		table.setGridColor(new Color(0, 0, 0));
 		table.setModel(new DefaultTableModel(

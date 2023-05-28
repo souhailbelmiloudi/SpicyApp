@@ -3,14 +3,20 @@ package ventanas;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-
 import tusPreguntas.BuscarPregunta;
+import tusPreguntas.Mis_preguntas;
+import tusPreguntas.Tus_preguntas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +28,7 @@ public class TUS_PREGUNTAS extends JPanel {
 	private JTextField borra_Field;
 	private JTextField busca_Field;
 	Conexion conexion = new Conexion();
+	Connection con;
 	public static List<Map<String, Object>> preguntas;
 	public TUS_PREGUNTAS() {
 		setLayout(null);
@@ -33,11 +40,36 @@ public class TUS_PREGUNTAS extends JPanel {
 		panel.setLayout(null);
 		
 		anadir_Field = new JTextField();
+		anadir_Field.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
 		anadir_Field.setBounds(10, 138, 655, 45);
 		panel.add(anadir_Field);
 		anadir_Field.setColumns(10);
 		
 		JLabel add_pre = new JLabel("+");
+		add_pre.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 try {
+	       			  
+		        		con = conexion.conectar();
+		        		String consulta = "INSERT INTO preguntas (ID_PREGUNTA,PREGUNTA) VALUES (idPREGUNTAS.NEXTVAL,'"+anadir_Field.getText()+"')"; 
+		        		PreparedStatement ps = con.prepareStatement(consulta);
+		        		ps.executeUpdate();
+		        		anadir_Field.setText("");
+		        	}catch( SQLException e1) {
+		        		JOptionPane.showMessageDialog(null, "Error "+e1);
+		        		
+		        	}finally {
+		        		conexion.desconectar();}
+			}}
+		);
 		add_pre.setHorizontalAlignment(SwingConstants.CENTER);
 		add_pre.setForeground(Color.BLACK);
 		add_pre.setFont(new Font("Lucida Fax", Font.BOLD, 51));
@@ -66,6 +98,14 @@ public class TUS_PREGUNTAS extends JPanel {
 		panel.add(borra_Field);
 		
 		JLabel borrar_pre = new JLabel("-\r\n");
+		borrar_pre.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				conexion.eliminar("PREGUNTAS", "ID_PREGUNTA ="+borra_Field.getText());
+				borra_Field.setText("");
+				
+			}
+		});
 		borrar_pre.setHorizontalAlignment(SwingConstants.CENTER);
 		borrar_pre.setForeground(Color.BLACK);
 		borrar_pre.setFont(new Font("Lucida Fax", Font.BOLD, 64));
@@ -98,6 +138,21 @@ public class TUS_PREGUNTAS extends JPanel {
 		buscar_pre.setFont(new Font("Lucida Fax", Font.BOLD, 25));
 		buscar_pre.setBounds(675, 386, 46, 41);
 		panel.add(buscar_pre);
+		
+		JLabel lblNewLabel = new JLabel("Jugar");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Mis_preguntas tuePreguntas = new Mis_preguntas();
+				tuePreguntas.setVisible(true);
+			}
+		});
+		lblNewLabel.setForeground(new Color(0, 0, 205));
+		lblNewLabel.setFont(new Font("Urdu Typesetting", Font.BOLD, 26));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(238, 441, 180, 48);
+		panel.add(lblNewLabel);
 
 	}
 }

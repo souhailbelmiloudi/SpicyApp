@@ -5,11 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+
+import javax.swing.JOptionPane;
 public class Conexion {
 
 	//Variables miembro:
-	Connection conexion ;
-	Statement stmt = null;
+	static Connection conexion ;
+	static Statement stmt = null;
 	ResultSet rs = null;
 	
 	
@@ -31,7 +33,7 @@ public class Conexion {
 		// carga del driver de Oracle
            Class.forName(driver);
            // conexión a la base de datos
-           this.conexion = DriverManager.getConnection(url, usuario, contrasena);
+           Conexion.conexion = DriverManager.getConnection(url, usuario, contrasena);
 	   } catch (ClassNotFoundException e) {
 	        System.err.println("Error al cargar el driver: " + e);
 	   } catch (SQLException e) {
@@ -105,5 +107,39 @@ public class Conexion {
 	    return resultados;
 	}
 
-	
+   //////////////////////////////////////////////////////////////////////
+   
+   
+   public int eliminar(String tabla, String condicion) {
+	    try {
+	        // Creación de la sentencia
+	        stmt = conexion.createStatement();
+
+	        // Construcción de la consulta de eliminación
+	        String consulta = "DELETE FROM " + tabla + " WHERE " + condicion;
+
+	        // Ejecución de la consulta
+	        int filasAfectadas = stmt.executeUpdate(consulta);
+
+	        return filasAfectadas;
+
+	    } catch (SQLException e) {
+	    	JOptionPane.showMessageDialog(null, e.getMessage());
+	    } finally {
+	        // Cerrar los recursos
+	        if (stmt != null) {
+	            try {
+	                stmt.close();
+	            } catch (SQLException e) {
+	                System.err.println("Error al cerrar el Statement: " + e);
+	            }
+	        }
+	    }
+	    
+	    return 0;
+	}
+
+
+
+   
 }
