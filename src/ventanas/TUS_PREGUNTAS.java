@@ -6,8 +6,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+
+import tusPreguntas.BuscarPregunta;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Map;
 
 public class TUS_PREGUNTAS extends JPanel {
 	
@@ -16,8 +21,8 @@ public class TUS_PREGUNTAS extends JPanel {
 	private JTextField anadir_Field;
 	private JTextField borra_Field;
 	private JTextField busca_Field;
-
-	
+	Conexion conexion = new Conexion();
+	public static List<Map<String, Object>> preguntas;
 	public TUS_PREGUNTAS() {
 		setLayout(null);
 		
@@ -81,8 +86,11 @@ public class TUS_PREGUNTAS extends JPanel {
 		buscar_pre.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String consulta = "Select id from ";
-				
+				conexion.conectar();
+				String consulta ="SELECT ID_PREGUNTA , PREGUNTA FROM PREGUNTAS WHERE PREGUNTA LIKE '%"+ busca_Field.getText()+ "%'";
+				 preguntas =conexion.consulta(consulta,"ID_PREGUNTA","ID_PREGUNTA", "PREGUNTA");
+				 BuscarPregunta buscarPregunta = new BuscarPregunta();
+				 buscarPregunta.setVisible(true);
 			}
 		});
 		buscar_pre.setHorizontalAlignment(SwingConstants.CENTER);

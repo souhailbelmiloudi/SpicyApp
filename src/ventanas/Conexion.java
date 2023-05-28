@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.*;
 public class Conexion {
 
 	//Variables miembro:
@@ -41,7 +42,7 @@ public class Conexion {
 	
    /*Este método recibe una consulta SQL en forma de cadena y un nombre de columna. Ejecuta la consulta en la base de datos y devuelve el valor de la 
     * columna especificada de la primera fila de resultados. Si no se encuentra ninguna fila, devuelve un mensaje indicando que  no se encontraron resultados.*/
-   public String consulta(String sql,String culmina) {
+   public String consulta(String sql,String columna) {
 	    
 	    try {
 	        // creación de la sentencia
@@ -49,7 +50,7 @@ public class Conexion {
 	        // ejecución de la consulta
 	        rs = stmt.executeQuery(sql);
 	        if (rs.next()) {
-				String randomValue = rs.getString(culmina);
+				String randomValue = rs.getString(columna);
 				return  randomValue;
 			} else {
 				return "No se encontraron resultados.";
@@ -75,6 +76,33 @@ public class Conexion {
 	    } catch (SQLException e) {
 	        System.err.println("Error al cerrar la conexión: " + e);
 	    }
+	}
+
+   ////////////////////////////////////////////////////////////////
+   public  List<Map<String, Object>> consulta(String sql, String orderBy, String... columnas) {
+	    List<Map<String, Object>> resultados = new ArrayList<>();
+
+	    try {
+	        // Creación de la sentencia
+	        stmt = conexion.createStatement();
+	        // Ejecución de la consulta
+	        String consultaOrdenada = sql + " ORDER BY " + orderBy;
+	        rs = stmt.executeQuery(consultaOrdenada);
+
+	        while (rs.next()) {
+	            Map<String, Object> fila = new HashMap<>();
+	            for (String columna : columnas) {
+	                Object valor = rs.getObject(columna);
+	                fila.put(columna, valor);
+	            }
+	            resultados.add(fila);
+	        }
+
+	    } catch (Exception e) {
+	        System.err.println("Error de consulta: " + e);
+	    }
+
+	    return resultados;
 	}
 
 	

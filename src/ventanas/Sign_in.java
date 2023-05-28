@@ -59,6 +59,7 @@ public class Sign_in extends  JFrame {
 
 	
 	public Sign_in() {
+		getContentPane().setEnabled(false);
 		setUndecorated(true);
 		
 		
@@ -69,7 +70,6 @@ public class Sign_in extends  JFrame {
 		setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
 		setType(Type.POPUP);
 		getContentPane().setBackground(new Color(255, 127, 80));
-		getContentPane().setEnabled(false);
 		getContentPane().setLayout(null);
 		
 		JLabel Titulo_Signin = new JLabel("Iniciar sesión en SpicyApp");
